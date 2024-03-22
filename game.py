@@ -21,8 +21,8 @@ print("Estoy pensando en una palabra. ¿Puedes adivinar cuál es?")
 word_displayed = "_" * len(secret_word)
 # Mostrarla palabra parcialmente adivinada
 print(f"Palabra: {word_displayed}")
-
-for i in range(max_attempts):
+failure_count =0
+while failure_count <3:
     # Pedir al jugador que ingrese una letra
     letter = input("Ingresa una letra: ").lower()
 
@@ -37,6 +37,7 @@ for i in range(max_attempts):
 
     if (letter == "") or (letter not in secret_word):
         print("Lo siento, la letra no está en la palabra.")
+        failure_count+=1
     elif letter in secret_word:
         print("¡Bien hecho! La letra está en la palabra.")
     # Mostrar la palabra parcialmente adivinada
@@ -53,5 +54,5 @@ for i in range(max_attempts):
         print(f"¡Felicidades! Has adivinado la palabra secreta:{secret_word}")
         break
 else:
-    print(f"¡Oh no! Has agotado tus {max_attempts} intentos.")
+    print(f"¡Oh no! Te has equivado {failure_count} veces y no puedes seguir jugando.")
     print(f"La palabra secreta era: {secret_word}")
