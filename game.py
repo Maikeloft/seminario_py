@@ -2,7 +2,11 @@ import random
 
 # Lista de palabras posibles
 words = ["python", "programación", "computadora", "código", "desarrollo",
-"inteligencia"]
+         "inteligencia"]
+
+# El juego tiene un bug. Si no se inserta ninguna letra para adivinar, el valor de la
+# letra es un string vacío "". Para este caso, el juego marca como que es un acierto.
+# Modifica el mismo para que indique que es un error en este caso.
 
 # Elegir una palabra al azar
 secret_word = random.choice(words)
@@ -26,25 +30,22 @@ for i in range(max_attempts):
     if letter in guessed_letters:
         print("Ya has intentado con esa letra. Intenta con otra.")
         continue
+        # Agregar la letra a la lista de letras adivinadas
 
-    # Agregar la letra a la lista de letras adivinadas
-    #Nota: Por cada funcionalidad agregada se debe realizar al menos un commit que identifiqueel cambio.
     guessed_letters.append(letter)
-    #Verificar si la letra está en la palabra secreta
+    # Verificar si la letra está en la palabra secreta
 
-    if letter in secret_word:
-        print("¡Bien hecho! La letra está en la palabra.")
-    else:
+    if (letter == "") or (letter not in secret_word):
         print("Lo siento, la letra no está en la palabra.")
-
+    elif letter in secret_word:
+        print("¡Bien hecho! La letra está en la palabra.")
     # Mostrar la palabra parcialmente adivinada
     letters = []
     for letter in secret_word:
-       if letter in guessed_letters:
+        if letter in guessed_letters:
             letters.append(letter)
-       else:
+        else:
             letters.append("_")
-
     word_displayed = "".join(letters)
     print(f"Palabra: {word_displayed}")
     # Verificar si se ha adivinado la palabra completa
